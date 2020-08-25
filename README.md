@@ -1,7 +1,7 @@
 # Test application
 
-When a controller method used {+param} reserved characters (like /) are included in the parameter.
-This is useful when you have a CMS like controller that lets callers specify a path as parmter.
+When a controller method uses {+param}, reserved characters (like /) are included in the parameter.
+This is useful when you have a CMS like controller that lets callers specify a path as paramter.
 However using the {+param} directive disables encoding and non-ascii parameters becomes garbage.
 
     @Controller("/")
@@ -11,3 +11,5 @@ However using the {+param} directive disables encoding and non-ascii parameters 
             return path;
         }
     }
+
+Requesting `/files/göran.txt` results in `files/gÃ¶ran.txt`
