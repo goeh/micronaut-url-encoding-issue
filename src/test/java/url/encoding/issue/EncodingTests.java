@@ -59,7 +59,20 @@ public class EncodingTests {
     }
 
     @Test
+    public void multiPathNonAscii() {
+        String result = httpClient.toBlocking().exchange("/foo/bar/göran.txt", String.class).body();
+        assertEquals("foo/bar/göran.txt", result);
+    }
+
+    @Test
     public void multiPathNonAsciiDeclarativeClient() throws Exception {
+        TestClient client = embeddedServer.getApplicationContext().getBean(TestClient.class);
+        String result = client.filename("/foo/bar/göran.txt");
+        assertEquals("/foo/bar/göran.txt", result);
+    }
+
+    @Test
+    public void multiPathNonAsciiIncludeReservedCharsDeclarativeClient() throws Exception {
         TestClient client = embeddedServer.getApplicationContext().getBean(TestClient.class);
         String result = client.path("/foo/bar/göran.txt");
         assertEquals("foo/bar/göran.txt", result);
