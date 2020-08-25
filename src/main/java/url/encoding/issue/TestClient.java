@@ -7,8 +7,8 @@ import io.micronaut.http.client.annotation.Client;
 public interface TestClient {
 
     @Get("/{path}")
-    String filename(String path);
+    String standard(String path);
 
     @Get("/{+path}")
-    String path(String path);
+    String includeReservedChars(String path);
 }

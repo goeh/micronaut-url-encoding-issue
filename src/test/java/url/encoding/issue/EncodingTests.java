@@ -48,7 +48,7 @@ public class EncodingTests {
     @Test
     public void singlePathNonAsciiDeclarativeClient() throws Exception {
         TestClient client = embeddedServer.getApplicationContext().getBean(TestClient.class);
-        String result = client.filename("göran.txt");
+        String result = client.standard("göran.txt");
         assertEquals("göran.txt", result);
     }
 
@@ -67,14 +67,14 @@ public class EncodingTests {
     @Test
     public void multiPathNonAsciiDeclarativeClient() throws Exception {
         TestClient client = embeddedServer.getApplicationContext().getBean(TestClient.class);
-        String result = client.filename("/foo/bar/göran.txt");
+        String result = client.standard("/foo/bar/göran.txt");
         assertEquals("/foo/bar/göran.txt", result);
     }
 
     @Test
     public void multiPathNonAsciiIncludeReservedCharsDeclarativeClient() throws Exception {
         TestClient client = embeddedServer.getApplicationContext().getBean(TestClient.class);
-        String result = client.path("/foo/bar/göran.txt");
+        String result = client.includeReservedChars("/foo/bar/göran.txt");
         assertEquals("foo/bar/göran.txt", result);
     }
 }
