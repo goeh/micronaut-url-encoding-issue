@@ -39,6 +39,12 @@ public class DeclarativeClientEncodingTests {
     }
 
     @Test
+    public void singlePathNonAsciiIncludeReservedCharsDeclarativeClient() throws Exception {
+        String result = client.includeReservedChars("göran.txt");
+        assertEquals("göran.txt", result);
+    }
+
+    @Test
     public void multiPathNonAsciiIncludeReservedCharsDeclarativeClient() throws Exception {
         String result = client.includeReservedChars("/foo/bar/göran.txt");
         assertEquals("foo/bar/göran.txt", result);
