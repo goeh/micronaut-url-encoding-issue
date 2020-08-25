@@ -6,9 +6,9 @@ import io.micronaut.http.client.annotation.Client;
 @Client("/")
 public interface TestClient {
 
-    @Get("/{path}")
+    @Get("{path}")
     String standard(String path);
 
-    @Get("/{+path}")
+    @Get("{+path}")
     String includeReservedChars(String path);
 }
