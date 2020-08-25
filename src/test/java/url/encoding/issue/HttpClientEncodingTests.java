@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UrlEncodingTests {
+public class HttpClientEncodingTests {
 
     static EmbeddedServer embeddedServer;
     static RxHttpClient httpClient;
@@ -46,13 +46,6 @@ public class UrlEncodingTests {
     }
 
     @Test
-    public void singlePathNonAsciiDeclarativeClient() throws Exception {
-        TestClient client = embeddedServer.getApplicationContext().getBean(TestClient.class);
-        String result = client.standard("göran.txt");
-        assertEquals("göran.txt", result);
-    }
-
-    @Test
     public void multiPathAscii() {
         String result = httpClient.toBlocking().exchange("/foo/bar/filename.txt", String.class).body();
         assertEquals("foo/bar/filename.txt", result);
@@ -61,20 +54,6 @@ public class UrlEncodingTests {
     @Test
     public void multiPathNonAscii() {
         String result = httpClient.toBlocking().exchange("/foo/bar/göran.txt", String.class).body();
-        assertEquals("foo/bar/göran.txt", result);
-    }
-
-    @Test
-    public void multiPathNonAsciiDeclarativeClient() throws Exception {
-        TestClient client = embeddedServer.getApplicationContext().getBean(TestClient.class);
-        String result = client.standard("/foo/bar/göran.txt");
-        assertEquals("/foo/bar/göran.txt", result);
-    }
-
-    @Test
-    public void multiPathNonAsciiIncludeReservedCharsDeclarativeClient() throws Exception {
-        TestClient client = embeddedServer.getApplicationContext().getBean(TestClient.class);
-        String result = client.includeReservedChars("/foo/bar/göran.txt");
         assertEquals("foo/bar/göran.txt", result);
     }
 }
