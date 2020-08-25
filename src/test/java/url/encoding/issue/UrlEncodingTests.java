@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class EncodingTests {
+public class UrlEncodingTests {
 
     static EmbeddedServer embeddedServer;
     static RxHttpClient httpClient;
