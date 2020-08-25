@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: url.encoding.issue
+---
+testFramework: junit
+sourceLanguage: java
