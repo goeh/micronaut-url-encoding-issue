@@ -56,4 +56,13 @@ public class HttpClientEncodingTests {
         String result = httpClient.toBlocking().exchange("/foo/bar/göran.txt", String.class).body();
         assertEquals("foo/bar/göran.txt", result);
     }
+
+    /**
+     * This works ok.
+     */
+    @Test
+    public void pathEncodedByCallerAndDecodingInController() throws Exception {
+        String result = httpClient.toBlocking().exchange("/encoded/" + encode("/foo/bar/göran.txt"), String.class).body();
+        assertEquals("/foo/bar/göran.txt", result);
+    }
 }

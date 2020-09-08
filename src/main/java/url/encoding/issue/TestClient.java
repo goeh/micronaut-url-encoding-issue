@@ -11,4 +11,7 @@ public interface TestClient {
 
     @Get("{+path}")
     String includeReservedChars(String path);
+
+    @Get("/encoded/{path}")
+    String withEncodedPath(String path);
 }

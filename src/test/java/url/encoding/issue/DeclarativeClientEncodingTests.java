@@ -47,6 +47,27 @@ public class DeclarativeClientEncodingTests {
     @Test
     public void multiPathNonAsciiIncludeReservedCharsDeclarativeClient() throws Exception {
         String result = client.includeReservedChars("/foo/bar/göran.txt");
-        assertEquals("foo/bar/göran.txt", result);
+        assertEquals("/foo/bar/göran.txt", result);
+    }
+
+    @Test
+    public void pathEncodedByCallerUsingSinglePathDeclarativeClient() throws Exception {
+        String result = client.standard(encode("/foo/bar/göran.txt"));
+        assertEquals("/foo/bar/göran.txt", result);
+    }
+
+    @Test
+    public void pathEncodedByCallerUsingMultiPathDeclarativeClient() throws Exception {
+        String result = client.includeReservedChars(encode("/foo/bar/göran.txt"));
+        assertEquals("/foo/bar/göran.txt", result);
+    }
+
+    /**
+     * This works ok.
+     */
+    @Test
+    public void pathEncodedByCallerAndDecodingInControllerDeclarativeClient() throws Exception {
+        String result = client.withEncodedPath(encode("/foo/bar/göran.txt"));
+        assertEquals("/foo/bar/göran.txt", result);
     }
 }
