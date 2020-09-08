@@ -21,7 +21,7 @@ public class TestController {
         return path;
     }
 
-    @Get(value = "/encoded/{+path}", produces = MediaType.TEXT_PLAIN)
+    @Get(value = "/encoded/{path}", produces = MediaType.TEXT_PLAIN)
     public String encoded(String path) {
         String decodedPath;
         try {
